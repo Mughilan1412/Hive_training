@@ -1,0 +1,26 @@
+# Build artifacts
+bin/
+obj/
+out/
+
+# Visual Studio files
+.vs/
+*.user
+*.suo
+
+# ASP.NET Core local config
+appsettings.Development.json
+Properties/launchSettings.json
+
+# HTTP test files (optional, VS auto-generates them)
+*.http
+
+# Logs & temp
+*.log
+*.tmp
+*.temp
+
+# NuGet packages
+*.nupkg
+*.snupkg
+packages/
