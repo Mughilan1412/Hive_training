@@ -27,4 +27,8 @@ kubectl apply -f deployment.yaml -f service.yaml
 minikube ip
 curl http://minikube_ip:30007/
 ----------------------------------------------
+kubectl rollout restart deployment dotnet-sample-app
+
+kubectl apply -f configmap.yml
+kubectl apply -f deployment.yml
 -----------------------------------------------

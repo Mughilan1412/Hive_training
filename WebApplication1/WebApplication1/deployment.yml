@@ -1,25 +1,3 @@
-# apiVersion: apps/v1
-# kind: Deployment
-# metadata:
-#   name: sample-python-app
-#   labels:
-#     app: sample-python-app
-# spec:
-#   replicas: 2
-#   selector:
-#     matchLabels:
-#       app: sample-python-app
-#   template:
-#     metadata:
-#       labels:
-#         app: sample-python-app
-#     spec:
-#       containers:
-#       - name: python-app
-#         image: mojomughil/python-sample-app-demo:v1
-#         ports:
-#         - containerPort: 80
-
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -41,10 +19,6 @@ spec:
         image: mojomughil/dotnet-sample-app-demo:v1
         ports:
         - containerPort: 80
-        env:
-        - name: ASPNETCORE_ENVIRONMENT
-          value: "Docker"
-        - name: Database__ConnectionString
-          value: "Docker_connection_to_DB"
-        - name : InputEnvironmentName
-          value: "Docker"
+        envFrom:
+        - configMapRef:
+            name: dotnet-sample-config
