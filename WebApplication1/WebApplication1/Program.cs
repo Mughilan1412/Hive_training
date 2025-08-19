@@ -12,7 +12,7 @@ var app = builder.Build();
 
 // Read values
 var aspnetEnv = builder.Environment.EnvironmentName; // ASPNETCORE_ENVIRONMENT
-var currentEnv = builder.Configuration["InputEnvironmentName"] ?? "Not Set";
+var InputEnvironmentName = builder.Configuration["InputEnvironmentName"] ?? "Not Set";
 var connectionString = builder.Configuration["Database:ConnectionString"] ?? "Not Set";
 
 app.MapGet("/", () =>
@@ -33,7 +33,7 @@ app.MapGet("/", () =>
         "<h1>Configuration</h1>" +
         "<div class='box'>" +
         $"<div class='item'><span class='label'>ASPNETCORE_ENVIRONMENT:</span> {aspnetEnv}</div>" +
-        $"<div class='item'><span class='label'>CurrentEnvironment:</span> {currentEnv}</div>" +
+        $"<div class='item'><span class='label'>CurrentEnvironment:</span> {InputEnvironmentName}</div>" +
         $"<div class='item'><span class='label'>Database:ConnectionString:</span> {connectionString}</div>" +
         "</div>" +
         "</body>" +

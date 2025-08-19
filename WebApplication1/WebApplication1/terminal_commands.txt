@@ -1,11 +1,30 @@
 git bash
 ----------------------------------------
-docker build -t dotnet-env:1 .
+#command to build docker image,
+docker build -t mojomughil/dotnet-sample-app-demo:v1 .
 -------------------------------------------
+#local testing docker run command:
 docker run -it -d -p 5000:80 \
   -e DOTNET_URLS="http://+:80" \
   -e ASPNETCORE_ENVIRONMENT=Docker \
   -e InputEnvironmentName=Docker \
   -e Database__ConnectionString="Docker_connection" \
-  dotnet-env:2
+  mojomughil/dotnet-sample-app-demo:v1 .
 ----------------------------------------------
+#"User → NodePort 30007 → Service port 8010 → Pod targetPort 80 → Container listens on 80"
+
+Ecternal clients connects through NodeIP 30007,
+Service_cluster_ip will be 8010 (this is for those who logins to the cluster)
+then Pods matching done by lables and selectors
+then traffic is sent to container port on 80
+ASP.NET Core app listens on 80
+-----------------------------------------------
+#actual code to deploy in minikube:
+minikube delete
+minikube start --driver=virtualbox --cpus=4 --memory=4096 --no-vtx-check
+#cd to repo in which you have deployment.yml and service.yml
+kubectl apply -f deployment.yaml -f service.yaml
+minikube ip
+curl http://minikube_ip:30007/
+----------------------------------------------
+-----------------------------------------------
