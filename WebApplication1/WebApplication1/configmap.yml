@@ -4,5 +4,4 @@ metadata:
   name: dotnet-sample-config
 data:
   ASPNETCORE_ENVIRONMENT: "Production"
-  Database__ConnectionString: "Prod_connection_to_DB"
   InputEnvironmentName: "Prod"

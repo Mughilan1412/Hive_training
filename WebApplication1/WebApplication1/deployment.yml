@@ -22,3 +22,5 @@ spec:
         envFrom:
         - configMapRef:
             name: dotnet-sample-config
+        - secretRef:
+              name: dotnet-sample-secret

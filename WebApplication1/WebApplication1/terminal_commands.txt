@@ -21,6 +21,7 @@ ASP.NET Core app listens on 80
 -----------------------------------------------
 #actual code to deploy in minikube:
 minikube delete
+minikube delete --all --purge
 minikube start --driver=virtualbox --cpus=4 --memory=4096 --no-vtx-check
 #cd to repo in which you have deployment.yml and service.yml
 kubectl apply -f deployment.yaml -f service.yaml
@@ -32,3 +33,30 @@ kubectl rollout restart deployment dotnet-sample-app
 kubectl apply -f configmap.yml
 kubectl apply -f deployment.yml
 -----------------------------------------------
+
+ingress steps:
+create ingress.yml file
+*
+minikube addons enable ingress
+kubectl get pods -n ingress-nginx
+#if not using minikube:
+#kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/cloud/deploy.yaml
+kubectl apply -f ingress.yml
+minikube ip
+#192.168.59.110
+#run vs code as admin, open  -> C:\Windows\System32\drivers\etc\hosts
+#on last line : 192.168.59.110 dotnet.local
+#make service as ClusterIP
+kubectl apply -f service.yml
+kubectl apply -f ingress,yml
+#browser : http://dotnet.local/
+-----------------------------------
+When you enable the NGINX Ingress Controller in Minikube (minikube addons enable ingress), Minikube deploys a LoadBalancer-like Service inside the cluster (usually of type NodePort or LoadBalancer, depending on the driver).
+
+Since Minikube is running locally on your machine, it doesn’t automatically provide you a real DNS name (like dotnet.local).
+
+Instead, it only exposes the Ingress Controller via the Minikube VM’s IP (minikube ip).
+
+Kubernetes expects you to use a real DNS domain (like dotnet.local), but since you don’t have a DNS server configured for that, we fake it using the /etc/hosts file.
+---------------------------------------
+
