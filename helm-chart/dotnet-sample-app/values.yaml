@@ -1,0 +1,52 @@
+replicaCount: 2
+
+image:
+  repository: mojomughil/dotnet-sample-app-demo
+  tag: v1
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 8010
+  targetPort: 80
+  nodePort: 30007
+
+ingress:
+  enabled: true
+  className: ""
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+  hosts:
+    - host: dotnet.local
+      paths:
+        - path: /
+          pathType: Prefix
+  tls: []
+
+config:
+  ASPNETCORE_ENVIRONMENT: "Production"
+  InputEnvironmentName: "Prod"
+
+secret:
+  Database__ConnectionString: UHJvZF9jb25uZWN0aW9uX3RvX0RC
+
+resources: {}
+nodeSelector: {}
+tolerations: []
+affinity: {}
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: false
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 3
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80  # Uncomment if you want memory-based scaling
