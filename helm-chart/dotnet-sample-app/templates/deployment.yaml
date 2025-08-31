@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "dotnet-sample-app.fullname" . }}
+  name: {{ include "dotnet-sample-app.fullname" . }}-deployment
   labels:
-    app: {{ include "dotnet-sample-app.name" . }}
+    app: {{ include "dotnet-sample-app.fullname" . }}-deployment
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: {{ include "dotnet-sample-app.name" . }}
+      app: {{ include "dotnet-sample-app.fullname" . }}-pods
   template:
     metadata:
       labels:
-        app: {{ include "dotnet-sample-app.name" . }}
+        app: {{ include "dotnet-sample-app.fullname" . }}-pods
     spec:
       containers:
-        - name: {{ .Chart.Name }}
+        - name: dotnet-app
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:

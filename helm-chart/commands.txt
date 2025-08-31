@@ -8,7 +8,7 @@ minikube ip
 #minikube_ip dotnet.local in hosts file
 
 #helm install <release-name> <chart-path>
-helm install dotnetapp ./mughil-helm-dotnet-app
+helm install dotnetapp ./dotnet-sample-app
 #If you already installed it once and are just making changes, use upgrade:
 helm upgrade dotnetapp ./mughil-helm-dotnet-app
 helm list

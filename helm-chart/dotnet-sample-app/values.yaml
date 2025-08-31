@@ -13,22 +13,18 @@ service:
 
 ingress:
   enabled: true
-  className: ""
+  className: nginx
+  host: dotnet.local
+  path: /
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
-  hosts:
-    - host: dotnet.local
-      paths:
-        - path: /
-          pathType: Prefix
-  tls: []
 
 config:
   ASPNETCORE_ENVIRONMENT: "Production"
   InputEnvironmentName: "Prod"
 
 secret:
-  Database__ConnectionString: UHJvZF9jb25uZWN0aW9uX3RvX0RC
+  Database__ConnectionString: "UHJvZF9jb25uZWN0aW9uX3RvX0RC"
 
 resources: {}
 nodeSelector: {}
