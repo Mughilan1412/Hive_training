@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: dotnet-sample-app
+  name: dotnet-sample-app-deployment
   labels:
-    app: dotnet-sample-app
+    app: dotnet-sample-app-deployment
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: dotnet-sample-app
+      app: mughil-app-pods
   template:
     metadata:
       labels:
-        app: dotnet-sample-app
+        app: mughil-app-pods
     spec:
       containers:
       - name: dotnet-app

@@ -5,7 +5,7 @@ metadata:
 spec:
   type: ClusterIP
   selector:
-    app: dotnet-sample-app
+    app: mughil-app-pods
   ports:
     - port: 8010          # Service port inside cluster
       targetPort: 80      # Container port
